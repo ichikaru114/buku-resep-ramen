@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ichiraku Ramen - Nikmati ramen lezat dengan berbagai pilihan menu!">
+    <title>Buku Resep Ramen</title>
+
+        <style>
+           <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f1f1f1;
+            color: #333;
+            line-height: 1.6;
+            padding: 0 20px;
+            overflow-x: hidden;
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        header {
+            background: linear-gradient(45deg, #FF6347, #ff7c4e);
+            color: white;
+            text-align: center;
+            padding: 70px 20px;
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            margin-top: 40px;
+            animation: slideInDown 1s ease-out;
+        }
+
+        @keyframes slideInDown {
+            0% { opacity: 0; transform: translateY(-50px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        header h1 {
+            font-size: 3.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            font-family: 'Roboto', sans-serif;
+            font-weight: bold;
+        }
+
+        nav ul {
+            list-style: none;
+            margin-top: 15px;
+        }
+
+        nav ul li {
+            display: inline-block;
+            margin: 0 25px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #ffde00;
+            transform: translateY(-5px);
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+            animation: fadeInMain 1.5s ease-out;
+        }
+
+        @keyframes fadeInMain {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        .recipe {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+            margin-bottom: 50px;
+            background-color: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transform: translateY(20px);
+            opacity: 0;
+            animation: fadeInUp 1s forwards;
+        }
+
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .recipe-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            object-fit: cover;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .recipe-image img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .recipe-details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .recipe-details h2 {
+            font-size: 2.5rem;
+            color: #FF6347;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .recipe-details .description {
+            font-size: 1.2rem;
+            color: #555;
+            margin-bottom: 20px;
+            line-height: 1.7;
+            opacity: 0;
+            animation: fadeInText 1s 0.5s forwards;
+        }
+
+        @keyframes fadeInText {
+            0% { opacity: 0; transform: translateY(10px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .recipe-details h3 {
+            font-size: 1.8rem;
+            margin-bottom: 12px;
+            color: #333;
+        }
+
+        .recipe-details ul,
+        .recipe-details ol {
+            margin-left: 20px;
+            font-size: 1rem;
+            line-height: 1.6;
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .recipe-details ul li,
+        .recipe-details ol li {
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .recipe-details ul li::before,
+        .recipe-details ol li::before {
+            content: '✔';
+            position: absolute;
+            left: -20px;
+            color: #FF6347;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 60px;
+            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
+            animation: fadeInFooter 1.5s ease-out;
+        }
+
+        @keyframes fadeInFooter {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        footer p {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .back-button {
+            display: inline-block;
+            background-color: #FF6347;
+            color: white;
+            padding: 12px 30px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-decoration: none;
+            text-align: center;
+            border-radius: 25px;
+            margin-top: 30px;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: #ff7c4e;
+        }
+
+        /* Responsiveness */
+        @media (max-width: 768px) {
+            .recipe {
+                grid-template-columns: 1fr;
+            }
+
+            .recipe-image img {
+                border-radius: 12px 12px 0 0;
+            }
+
+            .recipe-details {
+                padding: 20px;
+            }
+
+            header h1 {
+                font-size: 2.5rem;
+            }
+
+            nav ul li {
+                margin: 0 15px;
+            }
+        }
+    </style>
+</head>
+    
+<body>
+    <header>
+        <h1>Buku Resep Ramen</h1>
+        <nav>
+            <ul>
+                <li><a href="#resep1">Ramen Kuah Pedas</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="recipe" id="resep1">
+            <div class="recipe-image">
+                <img src="ramen17.jpg" alt="Ramen Kuah Pedas">
+            </div>
+            <div class="recipe-details">
+                <h2>Ramen Kuah Pedas</h2>
+                <p class="description">
+                   Ramen kuah pedas adalah hidangan mi khas Jepang yang disajikan dengan kuah bercita rasa pedas. Kuahnya biasanya dibuat dari kaldu ayam, babi, atau miso, yang dipadukan dengan bumbu pedas seperti cabai, pasta gochujang, atau minyak cabai. Ramen ini sering disajikan dengan tambahan topping seperti irisan daging, telur rebus setengah matang, daun bawang, nori, dan sayuran untuk menambah cita rasa dan tekstur. Ramen kuah pedas cocok dinikmati saat cuaca dingin atau bagi pencinta makanan pedas.
+                </p>
+                <h3>Bahan-bahan:</h3>
+                <ul>
+                    <li>Mie ramen siap saji</li>
+                    <li>3 siung bawang putih cincang</li>
+                    <li>2 cm jahe segar memarkan</li>
+                    <li>200 gram daging sapi cincang</li>
+                    <li>3 sdm minyak</li>
+                    <li>2 sdm daun bawang iris</li>
+                    <li>3 buah cabai rawit segar yang dihaluskan</li>
+                    <li>2 sdm selai kacang</li>
+                    <li>2 sdm shoyu atau kecap Jepang</li>
+                    <li>1 sdt merica bubuk</li>
+                    <li>1 sdt garam</li>
+                    <li>1 sdt gula pasir</li>
+                    <li>8 gram kaldu ayam bubuku</li>
+                    <li>1 sdm minyak cabai</li>
+                    <li>1000 ml air</li>
+                </ul>
+
+                <h3>Langkah Pembuatan:</h3>
+                <ol>
+                    <li>Memasak mie: Siapkan panci, masukkan air dan tunggu hingga mendidih. Masukkan mie ke dalamnya dan angkat mie ketika sudah matang. Sisihkan.</li>
+                    <li>Memasak kuah: Siapkan panci, isi dengan air lalu tunggu sampai mendidih. Siapkan penggorengan lalu tumis bawang putih, daun bawang dan jahe sampai harum. Masukkan dalam air kuah. Tambahkan ke dalamnya daging sapi cincang, selai kacang, shoyu, cabai rawit halus, merica bubuk, garam dan gula. Tunggu sampai semua bahan matang setelah itu masukkan mie ramen ke dalamnya.</li>
+                    <li>Menyajikan: Siapkan mangkuk lalu tuang ramen beserta kuahnya ke dalam mangkok. Santap selagi hangat.</li>
+                </ol>
+            </div>
+        </section>
+
+        <a href="buku resep ramen2.html" class="back-button">Kembali ke Halaman Awal</a>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Buku Resep Ramen - Semua Hak Cipta Dilindungi</p>
+    </footer>
+</body>
+</html>

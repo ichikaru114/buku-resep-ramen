@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Buku Resep Ramen - Nikmati ramen lezat dengan berbagai pilihan menu!">
+    <title>Buku Resep Ramen</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet"> <!-- FontAwesome -->
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f8f8f8;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        h1, h2 {
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 1px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(to right, #2c3e50, #34495e);
+            color: #fff;
+            padding: 60px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        header h1 {
+            font-size: 3.5rem;
+            margin: 0;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        /* Navigation Styles */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.75);
+            padding: 15px 0;
+            z-index: 100;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 2px 5px;
+            display: inline-block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        nav a:hover {
+            background-color: #1abc9c;
+            color: #fff;
+            transform: scale(1.05);
+            transition: transform 0.3s ease;
+        }
+
+        /* Carousel Styles */
+        .carousel-item {
+            height: 500px;
+            background-color: #333;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .carousel-inner img {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+            transition: transform 1s ease;
+        }
+
+        .carousel-inner img:hover {
+            transform: scale(1.1);
+        }
+
+        /* Content Styles */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 80px auto;
+        }
+
+        .menu, .about {
+            margin-bottom: 60px;
+        }
+
+        .menu h2, .about h2 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        /* Menu Items */
+        .menu-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .menu-item {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+
+        .menu-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .menu-item h3 {
+            font-size: 1.6rem;
+            color: #2c3e50;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .menu-item p {
+            color: #7f8c8d;
+            font-size: 1rem;
+            padding: 0 15px 15px;
+            text-align: center;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        .menu-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* About Section */
+        .about p {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #333;
+            text-align: justify;
+            margin-top: 20px;
+        }
+
+        /* Rating Styles */
+        .rating {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .rating input {
+            display: none;
+        }
+
+        .rating label {
+            font-size: 2rem;
+            color: #ddd;
+            cursor: pointer;
+        }
+
+        .rating input:checked ~ label {
+            color: #f39c12;
+        }
+
+        .rating label:hover,
+        .rating label:hover ~ label {
+            color: #f39c12;
+        }
+
+        /* Review Form Styles */
+        .review-form {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f8f8f8;
+            border-radius: 10px;
+        }
+
+        .review-form input[type="text"], 
+        .review-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .review-form textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .review-form button {
+            background-color: #2c3e50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .review-form button:hover {
+            background-color: #1abc9c;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #2c3e50;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 1rem;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Media Queries for Mobile */
+        @media screen and (max-width: 768px) {
+            header h1 {
+                font-size: 2.5rem;
+            }
+
+            .menu-items {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .menu-item h3 {
+                font-size: 1.4rem;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .menu-items {
+                grid-template-columns: 1fr;
+            }
+
+            nav {
+                padding: 5px 0;
+            }
+
+            .menu-item h3 {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <h1>Buku Resep Ramen</h1>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="#menu">Menu</a>
+        <a href="#about">Pengenalan Singkat</a>
+    </nav>
+    <!-- Carousel -->
+ <div id="carouselExample" class="carousel slide">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="ramen21.jpg" class="d-block w-100" alt="Ramen 1">
+            </div>
+            <div class="carousel-item">
+                <img src="ramen13.jpg" class="d-block w-100" alt="Ramen 2">
+            </div>
+            <div class="carousel-item">
+                <img src="ramen12.jpg" class="d-block w-100" alt="Ramen 3">
+            </div>
+            <div class="carousel-item">
+                <img src="ramen25.jpg" class="d-block w-100" alt="Ramen 4">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Menu Section -->
+        <section id="menu" class="menu">
+            <h2>Aneka Jenis Ramen</h2>
+            <div class="menu-items">
+                <!-- Repeat this for each menu item -->
+                 <div class="menu-item">
+                    <a href="ramen tonkotsu.html">
+                        <img src="ramen1.jpg" alt="Ramen Tonkotsu">
+                    </a>
+                    <h3>Ramen Tonkotsu</h3>
+                    <p>Kuah kaldu tulang babi yang dimasak dalam waktu lama menghasilkan
+                    hidangan dengan kekentalana yang lezat.</p>
+
+                    <!-- Rating System (Bintang) -->
+                    <div class="rating">
+                        <input type="radio" id="star5" name="rating" value="5">
+                        <label for="star5" title="5 stars"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="star4" name="rating" value="4">
+                        <label for="star4" title="4 stars"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="star3" name="rating" value="3">
+                        <label for="star3" title="3 stars"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="star2" name="rating" value="2">
+                        <label for="star2" title="2 stars"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="star1" name="rating" value="1">
+                        <label for="star1" title="1 star"><i class="fas fa-star"></i></label>
+                    </div>
+
+                     <!-- Review Form -->
+                    <div class="review-form">
+                        <h4>Berikan Ulasan:</h4>
+                        <textarea placeholder="Tulis review Anda..." required></textarea>
+                        <button type="submit">Kirim Review</button>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <a href="ramen shoyu.html">
+                        <img src="ramen2.jpg" alt="Ramen Miso">
+                    </a>
+                     <h3>Ramen Shoyu</h3>
+                    <p>Ramen Shoyu memiliki rasa asin khas dari kecap, yang memberikan dimensi rasa gurih dan warna kuah yang menggugah selera.</p>
+
+                     <!-- Rating System (Bintang) -->
+                    <div class="rating">
+                        <input type="radio" id="star5" name="rating" value="5">
+                        <label for="star5" title="5 stars"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="star4" name="rating" value="4">
+                        <label for="star4" title="4 stars"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="star3" name="rating" value="3">
+                        <label for="star3" title="3 stars"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="star2" name="rating" value="2">
+                        <label for="star2" title="2 stars"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="star1" name="rating" value="1">
+                        <label for="star1" title="1 star"><i class="fas fa-star"></i></label>
+                    </div>
+
+                     <!-- Review Form -->
+                    <div class="review-form">
+                        <h4>Berikan Ulasan:</h4>
+                        <textarea placeholder="Tulis review Anda..." required></textarea>
+                        <button type="submit">Kirim Review</button>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <a href="ramen miso.html">
+                        <img src="ramen3.jpg" alt="Ramen Miso">
+                    </a>
+                    <h3>Ramen Miso</h3>
+                    <p> Ramen Miso menggunakan pasta miso dan kaldu ayam atau sapi, menghasilkan kuah gurih dan khas.</p>
+
+                     <!-- Rating System (Bintang) -->
+                    <div class="rating">
+                        <input type="radio" id="star5" name="rating" value="5">
+                        <label for="star5" title="5 stars"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="star4" name="rating" value="4">
+                        <label for="star4" title="4 stars"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="star3" name="rating" value="3">
+                        <label for="star3" title="3 stars"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="star2" name="rating" value="2">
+                        <label for="star2" title="2 stars"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="star1" name="rating" value="1">
+                        <label for="star1" title="1 star"><i class="fas fa-star"></i></label>
+                    </div>
+
+                     <!-- Review Form -->
+                    <div class="review-form">
+                        <h4>Berikan Ulasan:</h4>
+                        <textarea placeholder="Tulis review Anda..." required></textarea>
+                        <button type="submit">Kirim Review</button>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <a href="ramen shio.html">
+                        <img src="ramen4.jpg" alt="Ramen Miso">
+                    </a>
+                    <h3>Ramen Shio</h3>
+                    <p>Shio Ramen menggunakan kaldu tulang ayam dan babi berbumbu garam, dengan kuah bening dan mie tipis lurus.</p>
+
+                     <!-- Rating System (Bintang) -->
+                    <div class="rating">
+                        <input type="radio" id="star5" name="rating" value="5">
+                        <label for="star5" title="5 stars"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="star4" name="rating" value="4">
+                        <label for="star4" title="4 stars"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="star3" name="rating" value="3">
+                        <label for="star3" title="3 stars"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="star2" name="rating" value="2">
+                        <label for="star2" title="2 stars"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="star1" name="rating" value="1">
+                        <label for="star1" title="1 star"><i class="fas fa-star"></i></label>
+                    </div>
+
+                     <!-- Review Form -->
+                    <div class="review-form">
+                        <h4>Berikan Ulasan:</h4>
+                        <textarea placeholder="Tulis review Anda..." required></textarea>
+                        <button type="submit">Kirim Review</button>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <a href="abura soba.html">
+                        <img src="ramen5.jpg" alt="Ramen Miso">
+                    </a>
+                    <h3>Abura soba</h3>
+                    <p>Abura soba disajikan dengan irisan daging babi chashu, rebung menma, nori, bawang putih, telur, serta minyak cabai dan cuka beras sebagai pelengkap.</p>
+
+                     <!-- Rating System (Bintang) -->
+                    <div class="rating">
+                        <input type="radio" id="star5" name="rating" value="5">
+                        <label for="star5" title="5 stars"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="star4" name="rating" value="4">
+                        <label for="star4" title="4 stars"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="star3" name="rating" value="3">
+                        <label for="star3" title="3 stars"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="star2" name="rating" value="2">
+                        <label for="star2" title="2 stars"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="star1" name="rating" value="1">
+                        <label for="star1" title="1 star"><i class="fas fa-star"></i></label>
+                    </div>
+
+                     <!-- Review Form -->
+                    <div class="review-form">
+                        <h4>Berikan Ulasan:</h4>
+                        <textarea placeholder="Tulis review Anda..." required></textarea>
+                        <button type="submit">Kirim Review</button>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <a href="Ramen-Kuah-Kaldu-Jamur.html">
+                        <img src="ramen15.jpg" alt="Ramen Miso">
+                    </a>
+                    <h3>Ramen Kuah Kaldu Jamur</h3>
+                    <p>Ramen kaldu jamur menggunakan rebusan jamur umami, dipadukan dengan mie, sayuran, tofu, dan telur rebus untuk rasa gurih.</p>
+
+                     <!-- Rating System (Bintang) -->
+                    <div class="rating">
+                        <input type="radio" id="star5" name="rating" value="5">
+                        <label for="star5" title="5 stars"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="star4" name="rating" value="4">
+                        <label for="star4" title="4 stars"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="star3" name="rating" value="3">
+                        <label for="star3" title="3 stars"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="star2" name="rating" value="2">
+                        <label for="star2" title="2 stars"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="star1" name="rating" value="1">
+                        <label for="star1" title="1 star"><i class="fas fa-star"></i></label>
+                    </div>
+
+                     <!-- Review Form -->
+                    <div class="review-form">
+                        <h4>Berikan Ulasan:</h4>
+                        <textarea placeholder="Tulis review Anda..." required></textarea>
+                        <button type="submit">Kirim Review</button>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <a href="Ramen-vegan.html">
+                        <img src="ramen16.jpg" alt="Ramen Miso">
+                    </a>
+                    <h3>Ramen Vegan</h3>
+                    <p>Ramen vegetarian terbuat dari tepung gandum, minyak, dan kaldu dashi (ikan/sayuran) tanpa bawang atau telur.</p>
+
+                     <!-- Rating System (Bintang) -->
+                    <div class="rating">
+                        <input type="radio" id="star5" name="rating" value="5">
+                        <label for="star5" title="5 stars"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="star4" name="rating" value="4">
+                        <label for="star4" title="4 stars"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="star3" name="rating" value="3">
+                        <label for="star3" title="3 stars"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="star2" name="rating" value="2">
+                        <label for="star2" title="2 stars"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="star1" name="rating" value="1">
+                        <label for="star1" title="1 star"><i class="fas fa-star"></i></label>
+                    </div>
+
+                     <!-- Review Form -->
+                    <div class="review-form">
+                        <h4>Berikan Ulasan:</h4>
+                        <textarea placeholder="Tulis review Anda..." required></textarea>
+                        <button type="submit">Kirim Review</button>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <a href="Ramen-Kuah-pedas.html">
+                        <img src="ramen17.jpg" alt="Ramen Miso">
+                    </a>
+                    <h3>Ramen Kuah Pedas</h3>
+                    <p>Ramen kuah pedas dengan kaldu dan bumbu cabai, dilengkapi topping daging, telur, dan sayuran.</p>
+
+                     <!-- Rating System (Bintang) -->
+                    <div class="rating">
+                        <input type="radio" id="star5" name="rating" value="5">
+                        <label for="star5" title="5 stars"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="star4" name="rating" value="4">
+                        <label for="star4" title="4 stars"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="star3" name="rating" value="3">
+                        <label for="star3" title="3 stars"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="star2" name="rating" value="2">
+                        <label for="star2" title="2 stars"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="star1" name="rating" value="1">
+                        <label for="star1" title="1 star"><i class="fas fa-star"></i></label>
+                    </div>
+
+                     <!-- Review Form -->
+                    <div class="review-form">
+                        <h4>Berikan Ulasan:</h4>
+                        <textarea placeholder="Tulis review Anda..." required></textarea>
+                        <button type="submit">Kirim Review</button>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <a href="Ramen-beef-curry.html">
+                        <img src="ramen18.jpg" alt="Ramen Miso">
+                    </a>
+                    <h3>Ramen Beef Curry</h3>
+                    <p>Ramen beef curry dengan kuah kari kental, daging sapi, dan sayuran, menawarkan rasa pedas, gurih, dan manis.</p>
+
+                     <!-- Rating System (Bintang) -->
+                    <div class="rating">
+                        <input type="radio" id="star5" name="rating" value="5">
+                        <label for="star5" title="5 stars"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="star4" name="rating" value="4">
+                        <label for="star4" title="4 stars"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="star3" name="rating" value="3">
+                        <label for="star3" title="3 stars"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="star2" name="rating" value="2">
+                        <label for="star2" title="2 stars"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="star1" name="rating" value="1">
+                        <label for="star1" title="1 star"><i class="fas fa-star"></i></label>
+                    </div>
+
+                     <!-- Review Form -->
+                    <div class="review-form">
+                        <h4>Berikan Ulasan:</h4>
+                        <textarea placeholder="Tulis review Anda..." required></textarea>
+                        <button type="submit">Kirim Review</button>
+                    </div>
+                </div>
+        </section>
+
+        <!-- About Us Section -->
+        <section id="about" class="about">
+            <h2>Pengenalan Singkat</h2>
+            <p>"Buku Resep Ramen" adalah panduan lengkap untuk para pecinta ramen yang ingin memasak hidangan Jepang otentik di rumah. Buku ini menawarkan berbagai resep ramen, seperti Tonkotsu, Shoyu, Miso, Shio, dan Abura Soba, dengan langkah-langkah mudah diikuti. Setiap resep dilengkapi tips untuk menghasilkan kaldu, mie, dan topping yang sempurna. Selain itu, buku ini juga memberikan variasi topping seperti chashu, telur setengah matang, tauge, dan nori, untuk memperkaya rasa ramen sesuai selera pribadi. Cocok bagi pemula maupun ahli masak, buku ini membantu Anda menciptakan ramen lezat di rumah.</p>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Resep Ramen | Semua hak cipta dilindungi</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
+
+

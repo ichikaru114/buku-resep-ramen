@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ichiraku Ramen - Nikmati ramen lezat dengan berbagai pilihan menu!">
+    <title>Buku Resep Ramen</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f1f1f1;
+            color: #333;
+            line-height: 1.6;
+            padding: 0 20px;
+            overflow-x: hidden;
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        header {
+            background: linear-gradient(45deg, #FF6347, #ff7c4e);
+            color: white;
+            text-align: center;
+            padding: 70px 20px;
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            margin-top: 40px;
+            animation: slideInDown 1s ease-out;
+        }
+
+        @keyframes slideInDown {
+            0% { opacity: 0; transform: translateY(-50px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        header h1 {
+            font-size: 3.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            font-family: 'Roboto', sans-serif;
+            font-weight: bold;
+        }
+
+        nav ul {
+            list-style: none;
+            margin-top: 15px;
+        }
+
+        nav ul li {
+            display: inline-block;
+            margin: 0 25px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #ffde00;
+            transform: translateY(-5px);
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+            animation: fadeInMain 1.5s ease-out;
+        }
+
+        @keyframes fadeInMain {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        .recipe {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+            margin-bottom: 50px;
+            background-color: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transform: translateY(20px);
+            opacity: 0;
+            animation: fadeInUp 1s forwards;
+        }
+
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .recipe-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            object-fit: cover;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .recipe-image img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .recipe-details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .recipe-details h2 {
+            font-size: 2.5rem;
+            color: #FF6347;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .recipe-details .description {
+            font-size: 1.2rem;
+            color: #555;
+            margin-bottom: 20px;
+            line-height: 1.7;
+            opacity: 0;
+            animation: fadeInText 1s 0.5s forwards;
+        }
+
+        @keyframes fadeInText {
+            0% { opacity: 0; transform: translateY(10px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .recipe-details h3 {
+            font-size: 1.8rem;
+            margin-bottom: 12px;
+            color: #333;
+        }
+
+        .recipe-details ul,
+        .recipe-details ol {
+            margin-left: 20px;
+            font-size: 1rem;
+            line-height: 1.6;
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .recipe-details ul li,
+        .recipe-details ol li {
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .recipe-details ul li::before,
+        .recipe-details ol li::before {
+            content: '✔';
+            position: absolute;
+            left: -20px;
+            color: #FF6347;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 60px;
+            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
+            animation: fadeInFooter 1.5s ease-out;
+        }
+
+        @keyframes fadeInFooter {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        footer p {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .back-button {
+            display: inline-block;
+            background-color: #FF6347;
+            color: white;
+            padding: 12px 30px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-decoration: none;
+            text-align: center;
+            border-radius: 25px;
+            margin-top: 30px;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: #ff7c4e;
+        }
+
+        /* Responsiveness */
+        @media (max-width: 768px) {
+            .recipe {
+                grid-template-columns: 1fr;
+            }
+
+            .recipe-image img {
+                border-radius: 12px 12px 0 0;
+            }
+
+            .recipe-details {
+                padding: 20px;
+            }
+
+            header h1 {
+                font-size: 2.5rem;
+            }
+
+            nav ul li {
+                margin: 0 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Buku Resep Ramen</h1>
+        <nav>
+            <ul>
+                <li><a href="#resep1">Abura Soba</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="recipe" id="resep1">
+            <div class="recipe-image">
+                <img src="ramen5.jpg" alt="Abura Soba">
+            </div>
+            <div class="recipe-details">
+                <h2>Abura Soba</h2>
+                <p class="description">
+                    Abura Soba adalah ramen yang disajikan tanpa kuah, tetapi tetap kaya rasa dengan berbagai bumbu. Sajikan dengan topping yang nikmat seperti telur rebus, daun bawang, dan minyak cabai!
+                </p>
+                <h3>Bahan-bahan:</h3>
+                <ul>
+                    <li>200 gram mie soba kering</li>
+                    <li>2 butir telur rebus, kupas dan belah dua</li>
+                    <li>2 batang daun bawang, iris tipis</li>
+                    <li>1 sdm minyak wijen</li>
+                    <li>1 sdm minyak sayur</li>
+                    <li>1 ruas jahe, iris tipis</li>
+                    <li>1 sdm kecap asin</li>
+                    <li>1 sdm saus tiram</li>
+                    <li>1 sdm cuka beras</li>
+                    <li>1 butir kuning telur mentah (jika suka)</li>
+                    <li>Sambal atau minyak cabai secukupnya</li>
+                </ul>
+                <h3>Petunjuk:</h3>
+                <ol>
+                    <li>Rebus mie soba hingga matang, tiriskan dan sisihkan.</li>
+                    <li>Campur semua bahan saus dalam mangkuk kecil dan aduk rata.</li>
+                    <li>Campurkan mie dengan saus, tambahkan telur rebus dan daun bawang di atasnya.</li>
+                    <li>Sajikan dengan sambal atau minyak cabai sesuai selera.</li>
+                </ol>
+            </div>
+        </section>
+        
+        <a href="buku resep ramen2.html" class="back-button">Kembali ke Halaman Awal</a>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Buku Resep Ramen - Semua Hak Cipta Dilindungi</p>
+    </footer>
+</body>
+</html>
